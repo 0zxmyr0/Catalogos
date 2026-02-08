@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumnos Registrados - Sistema de Gestión</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Volver al Inicio</a>
+        
+        <div class="stats-header">
+            Total de alumnos registrados: <span id="totalAlumnos">3</span>
+        </div>
+
+        <header class="header">
+            <h1>👥 Alumnos Registrados</h1>
+        </header>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE COMPLETO</th>
+                        <th>GRUPO</th>
+                        <th>ESTADO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="alumnosTableBody">
+                    <!-- Datos de ejemplo -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Cargar alumnos
+        document.addEventListener('DOMContentLoaded', function() {
+            const tbody = document.getElementById('alumnosTableBody');
+            const alumnos = [
+                {id: 5, nombre: 'HERNANDEZ MARTINEZ ALEJANDRA', grupo: 'CED101-M', activo: true},
+                {id: 4, nombre: 'CASTILLO JAVIER JESUS', grupo: 'CPF401-X', activo: false},
+                {id: 1, nombre: 'Medina Sanchez Bernardo David', grupo: 'CPF401-X', activo: false}
+            ];
+            
+            tbody.innerHTML = '';
+            alumnos.forEach(alumno => {
+                const row = tbody.insertRow();
+                row.className = alumno.activo ? 'active-row' : 'inactive-row';
+                row.innerHTML = `
+                    <td>${alumno.id}</td>
+                    <td>${alumno.nombre}</td>
+                    <td><span class="badge badge-code">${alumno.grupo}</span></td>
+                    <td>
+                        <span class="badge ${alumno.activo ? 'badge-active' : 'badge-inactive'}">
+                            ${alumno.activo ? 'ACTIVO' : 'INACTIVO'}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <button class="btn btn-warning">✏️ Editar</button>
+                        <button class="btn ${alumno.activo ? 'btn-danger' : 'btn-success'}">
+                            ${alumno.activo ? '❌ Inhabilitar' : '✅ Habilitar'}
+                        </button>
+                    </td>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

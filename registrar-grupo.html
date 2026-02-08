@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Grupo - Sistema de Gestión</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Volver al Inicio</a>
+        
+        <header class="header">
+            <h1>📚 Registrar Nuevo Grupo</h1>
+        </header>
+
+        <div class="form-container">
+            <form id="grupoForm">
+                <div class="form-group">
+                    <label for="carrera">Carrera</label>
+                    <select id="carrera" class="form-control" required>
+                        <option value="">Seleccione una carrera</option>
+                        <!-- Se llenará con JavaScript -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="turno">Turno</label>
+                    <select id="turno" class="form-control" required>
+                        <option value="">Seleccione un turno</option>
+                        <!-- Se llenará con JavaScript -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="grado">Grado</label>
+                    <select id="grado" class="form-control" required>
+                        <option value="">Seleccione un grado</option>
+                        <!-- Se llenará con JavaScript -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="codigo">Código del Grupo</label>
+                    <input type="text" id="codigo" class="form-control" placeholder="Ej: ISC101-M" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    ➕ Crear Grupo
+                </button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2 style="margin-bottom: 20px;">📋 Grupos Registrados</h2>
+            <table id="gruposTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Carrera</th>
+                        <th>Turno</th>
+                        <th>Grado</th>
+                        <th>Código</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="gruposTableBody">
+                    <!-- Se llenará con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Cargar datos iniciales
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarCarreras();
+            cargarTurnos();
+            cargarGrados();
+            cargarGrupos();
+        });
+
+        // Simular carga de carreras activas
+        function cargarCarreras() {
+            const select = document.getElementById('carrera');
+            const carreras = [
+                {id: 2, nombre: 'Administración de Empresas Turísticas', codigo: 'AET'},
+                {id: 4, nombre: 'Cultura Física y Educación del Deporte', codigo: 'CED'},
+                {id: 5, nombre: 'Derecho', codigo: 'DER'},
+                {id: 6, nombre: 'Diseño de Interiores', codigo: 'DIN'}
+            ];
+            
+            carreras.forEach(carrera => {
+                const option = document.createElement('option');
+                option.value = carrera.id;
+                option.textContent = `${carrera.nombre} (${carrera.codigo})`;
+                select.appendChild(option);
+            });
+        }
+
+        // Simular carga de turnos
+        function cargarTurnos() {
+            const select = document.getElementById('turno');
+            const turnos = [
+                {id: 1, nombre: 'Matutino'},
+                {id: 2, nombre: 'Vespertino'},
+                {id: 3, nombre: 'Nocturno'}
+            ];
+            
+            turnos.forEach(turno => {
+                const option = document.createElement('option');
+                option.value = turno.id;
+                option.textContent = turno.nombre;
+                select.appendChild(option);
+            });
+        }
+
+        // Simular carga de grados
+        function cargarGrados() {
+            const select = document.getElementById('grado');
+            const grados = [
+                {id: 1, nombre: 'Primer Semestre'},
+                {id: 2, nombre: 'Segundo Semestre'},
+                {id: 3, nombre: 'Tercer Semestre'},
+                {id: 4, nombre: 'Cuarto Semestre'},
+                {id: 5, nombre: 'Quinto Semestre'},
+                {id: 6, nombre: 'Sexto Semestre'}
+            ];
+            
+            grados.forEach(grado => {
+                const option = document.createElement('option');
+                option.value = grado.id;
+                option.textContent = grado.nombre;
+                select.appendChild(option);
+            });
+        }
+
+        // Cargar grupos existentes
+        function cargarGrupos() {
+            const tbody = document.getElementById('gruposTableBody');
+            const grupos = [
+                {id: 1, carrera: 'Cultura Física y Educación del Deporte', turno: 'Matutino', grado: 'Primer Semestre', codigo: 'CED101-M', activo: true},
+                {id: 2, carrera: 'Contaduría Pública y Finanzas', turno: 'Vespertino', grado: 'Cuarto Semestre', codigo: 'CPF401-X', activo: true}
+            ];
+            
+            tbody.innerHTML = '';
+            grupos.forEach(grupo => {
+                const row = tbody.insertRow();
+                row.className = grupo.activo ? 'active-row' : 'inactive-row';
+                row.innerHTML = `
+                    <td>${grupo.id}</td>
+                    <td>${grupo.carrera}</td>
+                    <td>${grupo.turno}</td>
+                    <td>${grupo.grado}</td>
+                    <td><span class="badge badge-code">${grupo.codigo}</span></td>
+                    <td>
+                        <span class="badge ${grupo.activo ? 'badge-active' : 'badge-inactive'}">
+                            ${grupo.activo ? 'ACTIVO' : 'INACTIVO'}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <button class="btn btn-warning">✏️ Editar</button>
+                        <button class="btn ${grupo.activo ? 'btn-danger' : 'btn-success'}">
+                            ${grupo.activo ? '❌ Desactivar' : '✅ Activar'}
+                        </button>
+                    </td>
+                `;
+            });
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('grupoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Grupo creado exitosamente (simulación)');
+            this.reset();
+            cargarGrupos();
+        });
+    </script>
+</body>
+</html>

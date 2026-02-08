@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Alumno - Sistema de Gestión</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Volver al Inicio</a>
+        
+        <header class="header">
+            <h1>👨‍🎓 Registrar Nuevo Alumno</h1>
+        </header>
+
+        <div class="form-container">
+            <form id="alumnoForm">
+                <div class="form-group">
+                    <label for="nombreCompleto">Nombre Completo</label>
+                    <input type="text" id="nombreCompleto" class="form-control" 
+                           placeholder="Apellido Paterno Apellido Materno Nombre(s)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <select id="grupo" class="form-control" required>
+                        <option value="">Seleccione un grupo</option>
+                        <!-- Se llenará con JavaScript -->
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    ➕ Inscribir Alumno
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Cargar grupos disponibles
+        document.addEventListener('DOMContentLoaded', function() {
+            const select = document.getElementById('grupo');
+            const grupos = [
+                {id: 1, codigo: 'CED101-M', carrera: 'Cultura Física y Educación del Deporte'},
+                {id: 2, codigo: 'CPF401-X', carrera: 'Contaduría Pública y Finanzas'}
+            ];
+            
+            grupos.forEach(grupo => {
+                const option = document.createElement('option');
+                option.value = grupo.id;
+                option.textContent = `${grupo.codigo} - ${grupo.carrera}`;
+                select.appendChild(option);
+            });
+        });
+
+        // Manejar envío del formulario
+        document.getElementById('alumnoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreCompleto').value;
+            alert(`Alumno "${nombre}" inscrito exitosamente (simulación)`);
+            this.reset();
+            setTimeout(() => {
+                location.href = 'alumnos-registrados.html';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
