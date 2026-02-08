@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Catálogos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Volver al Inicio</a>
+        
+        <header class="header">
+            <h1>⚙️ Administración de Catálogos</h1>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="mostrarTab('carreras')">📚 Carreras</button>
+            <button class="tab" onclick="mostrarTab('turnos')">🕐 Turnos</button>
+            <button class="tab" onclick="mostrarTab('grados')">📊 Grados</button>
+        </div>
+
+        <!-- Tab: Carreras -->
+        <div id="carrerasTab" class="tab-content">
+            <div class="form-container">
+                <h3 style="margin-bottom: 20px;">➕ Agregar Nueva Carrera</h3>
+                <form id="carreraForm">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="nombreCarrera">Nombre de la Carrera</label>
+                            <input type="text" id="nombreCarrera" class="form-control" 
+                                   placeholder="Ej: Ingeniería en Sistemas Computacionales" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="codigoCarrera">Código (3 letras)</label>
+                            <input type="text" id="codigoCarrera" class="form-control" 
+                                   placeholder="Ej: ISC" maxlength="3" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">💾 Agregar Carrera</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <h3 style="margin-bottom: 20px;">📋 Carreras Registradas</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CARRERA</th>
+                            <th>DESACTIVAR</th>
+                            <th>ACTIVAR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carrerasTableBody">
+                        <!-- Datos de ejemplo -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Turnos -->
+        <div id="turnosTab" class="tab-content" style="display: none;">
+            <div class="form-container">
+                <h3 style="margin-bottom: 20px;">➕ Agregar Nuevo Turno</h3>
+                <form id="turnoForm">
+                    <div class="form-group">
+                        <label for="nombreTurno">Nombre del Turno</label>
+                        <input type="text" id="nombreTurno" class="form-control" 
+                               placeholder="Ej: Matutino" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horarioTurno">Horario</label>
+                        <input type="text" id="horarioTurno" class="form-control" 
+                               placeholder="Ej: 7:00 AM - 1:00 PM" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">💾 Agregar Turno</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <h3 style="margin-bottom: 20px;">📋 Turnos Registrados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>TURNO</th>
+                            <th>HORARIO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="turnosTableBody">
+                        <!-- Se llenará con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Grados -->
+        <div id="gradosTab" class="tab-content" style="display: none;">
+            <div class="form-container">
+                <h3 style="margin-bottom: 20px;">➕ Agregar Nuevo Grado</h3>
+                <form id="gradoForm">
+                    <div class="form-group">
+                        <label for="nombreGrado">Nombre del Grado</label>
+                        <input type="text" id="nombreGrado" class="form-control" 
+                               placeholder="Ej: Primer Semestre" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">💾 Agregar Grado</button>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <h3 style="margin-bottom: 20px;">📋 Grados Registrados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>GRADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gradosTableBody">
+                        <!-- Se llenará con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Función para cambiar tabs
+        function mostrarTab(tab) {
+            // Ocultar todos los tabs
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remover clase active de todos los botones
+            document.querySelectorAll('.tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Mostrar tab seleccionado
+            document.getElementById(tab + 'Tab').style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Cargar datos de carreras
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarCarrerasTabla();
+            cargarTurnosTabla();
+            cargarGradosTabla();
+        });
+
+        function cargarCarrerasTabla() {
+            const tbody = document.getElementById('carrerasTableBody');
+            const carreras = [
+                {nombre: 'Administración de Empresas', codigo: 'ADE', activo: false},
+                {nombre: 'Administración de Empresas Turísticas', codigo: 'AET', activo: true},
+                {nombre: 'Contaduría Pública y Finanzas', codigo: 'CPF', activo: false},
+                {nombre: 'Cultura Física y Educación del Deporte', codigo: 'CED', activo: true},
+                {nombre: 'Derecho', codigo: 'DER', activo: true},
+                {nombre: 'Diseño de Interiores', codigo: 'DIN', activo: true}
+            ];
+            
+            tbody.innerHTML = '';
+            carreras.forEach(carrera => {
+                const row = tbody.insertRow();
+                row.className = carrera.activo ? 'active-row' : 'inactive-row';
+                row.innerHTML = `
+                    <td>
+                        ${carrera.nombre}
+                        <span class="badge badge-code">${carrera.codigo}</span>
+                    </td>
+                    <td>
+                        ${carrera.activo ? '<button class="btn btn-danger">❌</button>' : ''}
+                    </td>
+                    <td>
+                        ${!carrera.activo ? '<button class="btn btn-success">✅</button>' : ''}
+                    </td>
+                `;
+            });
+        }
+
+        function cargarTurnosTabla() {
+            const tbody = document.getElementById('turnosTableBody');
+            const turnos = [
+                {id: 1, nombre: 'Matutino', horario: '7:00 AM - 1:00 PM'},
+                {id: 2, nombre: 'Vespertino', horario: '2:00 PM - 8:00 PM'},
+                {id: 3, nombre: 'Nocturno', horario: '6:00 PM - 10:00 PM'}
+            ];
+            
+            tbody.innerHTML = '';
+            turnos.forEach(turno => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${turno.id}</td>
+                    <td>${turno.nombre}</td>
+                    <td>${turno.horario}</td>
+                    <td class="actions">
+                        <button class="btn btn-warning">✏️ Editar</button>
+                        <button class="btn btn-danger">🗑️ Eliminar</button>
+                    </td>
+                `;
+            });
+        }
+
+        function cargarGradosTabla() {
+            const tbody = document.getElementById('gradosTableBody');
+            const grados = [
+                'Primer Semestre', 'Segundo Semestre', 'Tercer Semestre',
+                'Cuarto Semestre', 'Quinto Semestre', 'Sexto Semestre',
+                'Séptimo Semestre', 'Octavo Semestre'
+            ];
+            
+            tbody.innerHTML = '';
+            grados.forEach((grado, index) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${grado}</td>
+                    <td class="actions">
+                        <button class="btn btn-warning">✏️ Editar</button>
+                        <button class="btn btn-danger">🗑️ Eliminar</button>
+                    </td>
+                `;
+            });
+        }
+
+        // Formularios
+        document.getElementById('carreraForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Carrera agregada exitosamente (simulación)');
+            this.reset();
+        });
+
+        document.getElementById('turnoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Turno agregado exitosamente (simulación)');
+            this.reset();
+        });
+
+        document.getElementById('gradoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Grado agregado exitosamente (simulación)');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
