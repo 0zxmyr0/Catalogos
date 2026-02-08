@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Alumnos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>
+                <span class="header-icon">📚</span>
+                Sistema de Gestión de Alumnos
+            </h1>
+        </header>
+
+        <div class="cards-grid">
+            <!-- Card 1: Registrar Grupo -->
+            <div class="card" onclick="location.href='registrar-grupo.html'">
+                <div class="card-icon">📚</div>
+                <h2>Registrar Grupo</h2>
+                <p>Crear nuevos grupos académicos</p>
+            </div>
+
+            <!-- Card 2: Registrar Alumno -->
+            <div class="card" onclick="location.href='registrar-alumno.html'">
+                <div class="card-icon">👨‍🎓</div>
+                <h2>Registrar Alumno</h2>
+                <p>Inscribir nuevos estudiantes</p>
+            </div>
+
+            <!-- Card 3: Alumnos Registrados -->
+            <div class="card" onclick="location.href='alumnos-registrados.html'">
+                <div class="card-icon">👥</div>
+                <h2>Alumnos Registrados</h2>
+                <p>Ver lista de estudiantes</p>
+            </div>
+
+            <!-- Card 4: Catálogos -->
+            <div class="card" onclick="location.href='catalogos.html'">
+                <div class="card-icon">⚙️</div>
+                <h2>Catálogos</h2>
+                <p>Gestionar carreras y configuración</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
