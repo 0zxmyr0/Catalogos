@@ -1,0 +1,344 @@
+/* Reset y variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --dark-bg: #0f172a;
+    --card-bg: #1e293b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --text-light: #f1f5f9;
+    --text-gray: #94a3b8;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 30px 0;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-icon {
+    font-size: 3rem;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* Forms */
+.form-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--dark-bg);
+    border: 2px solid #334155;
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-warning {
+    background: var(--warning);
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+/* Table */
+.table-container {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 30px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: var(--dark-bg);
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #334155;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+tbody tr.active-row {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+tbody tr.inactive-row {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-active {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+}
+
+.badge-inactive {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+}
+
+.badge-code {
+    background: rgba(37, 99, 235, 0.2);
+    color: var(--primary-color);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #334155;
+}
+
+.tab {
+    padding: 15px 30px;
+    background: transparent;
+    border: none;
+    color: var(--text-gray);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab:hover {
+    color: var(--text-light);
+}
+
+.tab.active {
+    color: var(--primary-color);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Back button */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #334155;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover {
+    background: #475569;
+    transform: translateX(-5px);
+}
+
+/* Stats */
+.stats-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .table-container {
+        padding: 15px;
+    }
+    
+    table {
+        font-size: 0.85rem;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+}
